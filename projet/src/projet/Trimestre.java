@@ -77,6 +77,7 @@ public class Trimestre extends javax.swing.JFrame {
         txtrech = new javax.swing.JTextField();
         jScrollPane3 = new javax.swing.JScrollPane();
         table = new javax.swing.JTable();
+        quitter = new javax.swing.JButton();
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -160,7 +161,7 @@ public class Trimestre extends javax.swing.JFrame {
             }
         });
         getContentPane().add(jButton1);
-        jButton1.setBounds(40, 400, 80, 23);
+        jButton1.setBounds(30, 390, 90, 30);
 
         jButton2.setText("Supprimer");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
@@ -169,7 +170,7 @@ public class Trimestre extends javax.swing.JFrame {
             }
         });
         getContentPane().add(jButton2);
-        jButton2.setBounds(170, 400, 80, 23);
+        jButton2.setBounds(170, 390, 90, 30);
 
         jButton3.setText("Modifier");
         jButton3.addActionListener(new java.awt.event.ActionListener() {
@@ -215,7 +216,16 @@ public class Trimestre extends javax.swing.JFrame {
         jScrollPane3.setViewportView(table);
 
         getContentPane().add(jScrollPane3);
-        jScrollPane3.setBounds(400, 200, 320, 90);
+        jScrollPane3.setBounds(400, 200, 390, 90);
+
+        quitter.setText("Quitter");
+        quitter.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                quitterActionPerformed(evt);
+            }
+        });
+        getContentPane().add(quitter);
+        quitter.setBounds(680, 400, 130, 30);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -252,8 +262,7 @@ private void deplace (int i){
         /*String requete = "INSERT INTO trimestre(ID_tri,numero,debut,fin,id)+ VALUES('"
                 +id_tri+"','"+numero+"','"+debut+"','"+fin+"','"+id+"')"; */
         try{
-            stmt.executeUpdate("INSERT INTO trimestre(IDtrimestre,numero,debut,fin,id)VALUES('"+
-                    IDtrimestre+"','"+numero+"','"+debut+"','"+fin+"','"+id+"');");
+            stmt.executeUpdate("INSERT INTO trimestre(IDtrimestre,numero,debut,fin,id)VALUES('"+IDtrimestre+"','"+numero+"','"+debut+"','"+fin+"','"+id+"');");
             JOptionPane.showMessageDialog(null,"Le trimestre a bien été ajouté");
         }catch (Exception ex){
             JOptionPane.showMessageDialog(null,ex.getMessage());}
@@ -287,6 +296,7 @@ private void deplace (int i){
                 Object[] trimestre = {rset.getString(1),rset.getString(2),rset.getString(3),rset.getString(4),rset.getString(5)};
                 model.addRow(trimestre);
              }
+            
             if (model.getRowCount()==0){
                 JOptionPane.showMessageDialog(null,"Il n'y a pas de trimestre correspondant a votre recherche");
             }
@@ -294,6 +304,14 @@ private void deplace (int i){
             
         }catch(Exception e){JOptionPane.showMessageDialog(null,"erreur de recherche");}
     }//GEN-LAST:event_jButton4ActionPerformed
+
+    private void quitterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_quitterActionPerformed
+        if(evt.getSource()==quitter)
+        {
+                this.setVisible(false);
+                this.dispose();
+        }
+    }//GEN-LAST:event_quitterActionPerformed
 
     /**
      * @param args the command line arguments
@@ -347,6 +365,7 @@ private void deplace (int i){
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JTable jTable1;
     private javax.swing.JTable jTable2;
+    private javax.swing.JButton quitter;
     private javax.swing.JTable table;
     private javax.swing.JTextField txtdebut;
     private javax.swing.JTextField txtfin;
