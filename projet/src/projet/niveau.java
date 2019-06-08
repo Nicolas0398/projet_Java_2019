@@ -126,14 +126,14 @@ public class niveau extends javax.swing.JFrame {
         getContentPane().add(jLabel6);
         jLabel6.setBounds(140, 30, 490, 40);
 
-        jButton4.setText("Rechercher");
+        jButton4.setText("Rechercher (nom)");
         jButton4.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton4ActionPerformed(evt);
             }
         });
         getContentPane().add(jButton4);
-        jButton4.setBounds(400, 110, 100, 30);
+        jButton4.setBounds(290, 110, 260, 30);
         getContentPane().add(txtrech);
         txtrech.setBounds(560, 110, 90, 30);
 
@@ -206,7 +206,7 @@ public class niveau extends javax.swing.JFrame {
         try{
             model.setRowCount(0);
             {
-                rset = stmt.executeQuery("Select * From niveau WHERE niveauID = '"+txtrech.getText()+"'");
+                rset = stmt.executeQuery("Select * From niveau WHERE nom = '"+txtrech.getText()+"'");
             }while(rset.next()){
                 Object[] niveau = {rset.getString(1),rset.getString(2)};
                 model.addRow(niveau);

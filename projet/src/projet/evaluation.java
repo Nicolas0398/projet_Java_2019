@@ -30,6 +30,7 @@ public class evaluation extends javax.swing.JFrame {
     model.addColumn("appreciation");
     try{
         stmt=cnx.obtenirconnexion().createStatement();
+        remplibox();
         ResultSet Rs=stmt.executeQuery("");
         while(Rs.next()){
             model.addRow(new Object[]{Rs.getString("evalutationID"),Rs.getString("detailsID"),Rs.getString("note"),

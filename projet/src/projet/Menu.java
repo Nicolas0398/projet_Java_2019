@@ -77,7 +77,7 @@ public class Menu extends javax.swing.JFrame {
         jPanel1.add(jButton2);
         jButton2.setBounds(19, 238, 313, 56);
 
-        jButton3.setText("jButton3");
+        jButton3.setText("Gestion d'une inscription");
         jButton3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton3ActionPerformed(evt);
@@ -86,13 +86,23 @@ public class Menu extends javax.swing.JFrame {
         jPanel1.add(jButton3);
         jButton3.setBounds(19, 312, 313, 65);
 
-        jButton4.setText("jButton4");
+        jButton4.setText("Gestion d'une évaluation");
+        jButton4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton4ActionPerformed(evt);
+            }
+        });
         jPanel1.add(jButton4);
-        jButton4.setBounds(423, 133, 155, 69);
+        jButton4.setBounds(423, 133, 260, 69);
 
-        jButton5.setText("jButton5");
+        jButton5.setText("Gestion d'une école");
+        jButton5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton5ActionPerformed(evt);
+            }
+        });
         jPanel1.add(jButton5);
-        jButton5.setBounds(423, 235, 154, 59);
+        jButton5.setBounds(423, 235, 270, 59);
 
         jButton6.setText("Gestion d'un niveau");
         jButton6.addActionListener(new java.awt.event.ActionListener() {
@@ -103,26 +113,41 @@ public class Menu extends javax.swing.JFrame {
         jPanel1.add(jButton6);
         jButton6.setBounds(412, 312, 273, 65);
 
-        jButton7.setText("jButton7");
+        jButton7.setText("Gestion d'un enseignement");
         jButton7.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton7ActionPerformed(evt);
             }
         });
         jPanel1.add(jButton7);
-        jButton7.setBounds(700, 133, 154, 69);
+        jButton7.setBounds(700, 133, 280, 69);
 
-        jButton8.setText("jButton8");
+        jButton8.setText("Gestion des détails d'un bulletin");
+        jButton8.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton8ActionPerformed(evt);
+            }
+        });
         jPanel1.add(jButton8);
-        jButton8.setBounds(700, 235, 154, 59);
+        jButton8.setBounds(700, 240, 280, 59);
 
-        jButton9.setText("jButton9");
+        jButton9.setText("Gestion d'une classe");
+        jButton9.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton9ActionPerformed(evt);
+            }
+        });
         jPanel1.add(jButton9);
-        jButton9.setBounds(700, 316, 154, 63);
+        jButton9.setBounds(700, 316, 280, 63);
 
-        jButton10.setText("jButton10");
+        jButton10.setText("Gestion d'un bulletin");
+        jButton10.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton10ActionPerformed(evt);
+            }
+        });
         jPanel1.add(jButton10);
-        jButton10.setBounds(991, 138, 149, 69);
+        jButton10.setBounds(991, 138, 290, 69);
 
         jButton11.setText("jButton11");
         jPanel1.add(jButton11);
@@ -137,12 +162,12 @@ public class Menu extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 1323, Short.MAX_VALUE)
                 .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 536, Short.MAX_VALUE)
         );
 
         pack();
@@ -153,7 +178,7 @@ public class Menu extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
-        // TODO add your handling code here:
+         new enseignement().setVisible(true); // TODO add your handling code here:
     }//GEN-LAST:event_jButton7ActionPerformed
 
     private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
@@ -167,6 +192,26 @@ public class Menu extends javax.swing.JFrame {
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         new inscription().setVisible(true);        // TODO add your handling code here:
     }//GEN-LAST:event_jButton3ActionPerformed
+
+    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+        new evaluation().setVisible(true);        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton4ActionPerformed
+
+    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
+        new ecole().setVisible(true);        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton5ActionPerformed
+
+    private void jButton8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton8ActionPerformed
+        new detailsbulletin().setVisible(true);        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton8ActionPerformed
+
+    private void jButton9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton9ActionPerformed
+         new classe().setVisible(true);        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton9ActionPerformed
+
+    private void jButton10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton10ActionPerformed
+         new bulletin().setVisible(true);        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton10ActionPerformed
 
     /**
      * @param args the command line arguments

@@ -144,14 +144,14 @@ public class Personne extends javax.swing.JFrame {
         getContentPane().add(jLabel6);
         jLabel6.setBounds(157, 0, 502, 40);
 
-        jButton4.setText("Rechercher");
+        jButton4.setText("Rechercher (nom)");
         jButton4.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton4ActionPerformed(evt);
             }
         });
         getContentPane().add(jButton4);
-        jButton4.setBounds(417, 80, 100, 30);
+        jButton4.setBounds(347, 80, 170, 30);
         getContentPane().add(txtrech);
         txtrech.setBounds(577, 80, 90, 30);
 
@@ -241,7 +241,7 @@ private void deplace (int i){
         try{
             model.setRowCount(0);
             {
-                rset = stmt.executeQuery("Select * From personne WHERE personneID = '"+txtrech.getText()+"'");
+                rset = stmt.executeQuery("Select * From personne WHERE nom = '"+txtrech.getText()+"'");
             }while(rset.next()){
                 Object[] personne = {rset.getString(1),rset.getString(2),rset.getString(3),rset.getString(4)};
                 model.addRow(personne);
