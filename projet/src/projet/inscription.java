@@ -10,34 +10,44 @@ import javax.swing.table.DefaultTableModel;
 
 /**
  *
- * @author rajur
+ * @author nicol
  */
-public class Personne extends javax.swing.JFrame {
-    Connecter cnx = new Connecter ();
+public class inscription extends javax.swing.JFrame {
+    
+     Connecter cnx = new Connecter ();
     Statement stmt;
     ResultSet rset;
     DefaultTableModel model = new DefaultTableModel ();
+    
+
     /**
-     * Creates new form Personne
+     * Creates new form inscription
      */
-    public Personne() {
+    
+    
+    public inscription() {
         initComponents();
         
+    model.addColumn("inscriptionID");
+    model.addColumn("classeID");
     model.addColumn("personneID");
-    model.addColumn("nom");
-    model.addColumn("prenom");
-    model.addColumn("type");
+    
+   
     try{
         stmt=cnx.obtenirconnexion().createStatement();
+        remplibox();
+        remplibox1();
+        
         ResultSet Rs=stmt.executeQuery("");
         while(Rs.next()){
-            model.addRow(new Object[]{Rs.getString("personneID"),Rs.getString("nom"),Rs.getString("prenom"),
-            Rs.getString("type")});
+            model.addRow(new Object[]{Rs.getString("inscriptionID"),Rs.getString("classeID"),Rs.getString("personneID")});
         }
         
     }catch(Exception e){System.err.println(e);}
     
     table.setModel(model);
+        
+        
     }
 
     /**
@@ -53,11 +63,9 @@ public class Personne extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
-        txtid = new javax.swing.JTextField();
-        txtnom = new javax.swing.JTextField();
-        txtpr = new javax.swing.JTextField();
-        txttype = new javax.swing.JComboBox<>();
+        txti = new javax.swing.JTextField();
+        txtc = new javax.swing.JComboBox<>();
+        txtp = new javax.swing.JComboBox<>();
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
@@ -74,40 +82,59 @@ public class Personne extends javax.swing.JFrame {
         jPanel1.setLayout(null);
 
         jLabel1.setFont(new java.awt.Font("Times New Roman", 1, 12)); // NOI18N
-        jLabel1.setText("personneID  : ");
+        jLabel1.setText("InscriptionID");
         jPanel1.add(jLabel1);
         jLabel1.setBounds(20, 40, 90, 20);
 
         jLabel2.setFont(new java.awt.Font("Times New Roman", 1, 12)); // NOI18N
-        jLabel2.setText("nom  :");
+        jLabel2.setText("classeID");
         jPanel1.add(jLabel2);
         jLabel2.setBounds(30, 100, 70, 20);
 
         jLabel3.setFont(new java.awt.Font("Times New Roman", 1, 12)); // NOI18N
-        jLabel3.setText("prenom :");
+        jLabel3.setText("personneID");
         jPanel1.add(jLabel3);
-        jLabel3.setBounds(30, 160, 50, 30);
+        jLabel3.setBounds(30, 160, 70, 30);
 
-        jLabel4.setFont(new java.awt.Font("Times New Roman", 1, 12)); // NOI18N
-        jLabel4.setText("type : ");
-        jPanel1.add(jLabel4);
-        jLabel4.setBounds(30, 220, 60, 30);
-
-        txtid.addActionListener(new java.awt.event.ActionListener() {
+        txti.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtidActionPerformed(evt);
+                txtiActionPerformed(evt);
             }
         });
-        jPanel1.add(txtid);
-        txtid.setBounds(130, 40, 70, 30);
-        jPanel1.add(txtnom);
-        txtnom.setBounds(130, 100, 70, 30);
-        jPanel1.add(txtpr);
-        txtpr.setBounds(130, 160, 70, 30);
+        jPanel1.add(txti);
+        txti.setBounds(130, 40, 70, 30);
 
-        txttype.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Etudiant ", "Enseignant" }));
-        jPanel1.add(txttype);
-        txttype.setBounds(130, 210, 100, 40);
+        txtc.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                txtcMouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                txtcMouseEntered(evt);
+            }
+        });
+        txtc.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtcActionPerformed(evt);
+            }
+        });
+        jPanel1.add(txtc);
+        txtc.setBounds(130, 100, 80, 30);
+
+        txtp.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                txtpMouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                txtpMouseEntered(evt);
+            }
+        });
+        txtp.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtpActionPerformed(evt);
+            }
+        });
+        jPanel1.add(txtp);
+        txtp.setBounds(120, 170, 110, 30);
 
         getContentPane().add(jPanel1);
         jPanel1.setBounds(81, 48, 290, 300);
@@ -140,7 +167,7 @@ public class Personne extends javax.swing.JFrame {
         jButton3.setBounds(327, 360, 100, 30);
 
         jLabel6.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
-        jLabel6.setText("Modifier/ Ajouter / Supprimer les informations d'une Personne");
+        jLabel6.setText("Modifier/ Ajouter / Supprimer les informations d'une inscription");
         getContentPane().add(jLabel6);
         jLabel6.setBounds(157, 0, 502, 40);
 
@@ -157,13 +184,13 @@ public class Personne extends javax.swing.JFrame {
 
         table.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null}
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null}
             },
             new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4", "Title 5"
+                "inscriptionID", "classeID", "Title 3"
             }
         ));
         table.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -174,7 +201,7 @@ public class Personne extends javax.swing.JFrame {
         jScrollPane3.setViewportView(table);
 
         getContentPane().add(jScrollPane3);
-        jScrollPane3.setBounds(417, 170, 390, 90);
+        jScrollPane3.setBounds(417, 170, 390, 120);
 
         quitter.setText("Quitter");
         quitter.addActionListener(new java.awt.event.ActionListener() {
@@ -187,40 +214,41 @@ public class Personne extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-private void deplace (int i){
+    
+    private void deplace (int i){
     try{
-      txtid.setText(model.getValueAt(i,0).toString());  
-      txtnom.setText(model.getValueAt(i,1).toString()); 
-      txtpr.setText(model.getValueAt(i,2).toString()); 
-      txttype.setSelectedItem(model.getValueAt(i,3).toString()); 
+      txti.setText(model.getValueAt(i,0).toString());  
+      txtc.setSelectedItem(model.getValueAt(i,1).toString()); 
+      txtp.setSelectedItem(model.getValueAt(i,2).toString()); 
+      
     }catch (Exception e){System.err.println(e);
     JOptionPane.showMessageDialog(null, "erreur de deplacement"+e.getLocalizedMessage());}
 }
-    private void txtidActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtidActionPerformed
+    private void txtiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtiActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_txtidActionPerformed
+    }//GEN-LAST:event_txtiActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        String personneID=txtid.getText();
-        String nom=txtnom.getText();
-        String prenom=txtpr.getText();
-        String type=txttype.getSelectedItem().toString();
+        String inscriptionID=txti.getText();
+        String classeID=txtc.getSelectedItem().toString();
+        String personneID=txtp.getSelectedItem().toString();
         
+
         /*String requete = "INSERT INTO trimestre(ID_tri,numero,debut,fin,id)+ VALUES('"
         +id_tri+"','"+numero+"','"+debut+"','"+fin+"','"+id+"')"; */
         try{
-            stmt.executeUpdate("INSERT INTO personne(personneID,nom,prenom,type)VALUES('"+
-                personneID+"','"+nom+"','"+prenom+"','"+type+"');");
-            JOptionPane.showMessageDialog(null,"La personne a bien été ajoutée");
+            stmt.executeUpdate("INSERT INTO inscription(inscriptionID,classeID,personneID)VALUES('"+
+                inscriptionID+"','"+classeID+"','"+personneID+"');");
+            JOptionPane.showMessageDialog(null,"L'inscription a bien été ajoutée");
         }catch (Exception ex){
             JOptionPane.showMessageDialog(null,ex.getMessage());}
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         try{
-            if(txtid.getText().length() != 0){
-                stmt.executeUpdate("Delete From personne where personneID ="+txtid.getText());
-                JOptionPane.showMessageDialog(null,"La personne a bien été supprimée");
+            if(txti.getText().length() != 0){
+                stmt.executeUpdate("Delete From inscription where inscriptionID ="+txti.getText());
+                JOptionPane.showMessageDialog(null,"L'inscription a bien été supprimée");
             }
             else{JOptionPane.showMessageDialog(null,"Veuillez remplir le champ : ");}
         }catch(Exception e){JOptionPane.showMessageDialog(null,"erreur dans la suppression");}
@@ -228,10 +256,9 @@ private void deplace (int i){
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         try{
-            stmt.executeUpdate("UPDATE personne SET nom='"+txtnom.getText()+"',"
-                + "prenom='"+txtpr.getText()+"',type='"+txttype.getSelectedItem().toString()+"',"
-                + "id='"+txtid.getText()+"' WHERE personneID= "+txtid.getText());
-            JOptionPane.showMessageDialog(null,"La personne a bien été modifiée");
+            stmt.executeUpdate("UPDATE inscription SET classeID='"+txtc.getSelectedItem().toString()+"',"
+                + "personneID='"+txtp.getSelectedItem().toString()+"' WHERE inscriptionID= "+txti.getText());
+            JOptionPane.showMessageDialog(null,"L'inscription a bien été modifiée");
 
         }catch (Exception e){JOptionPane.showMessageDialog(null,"erreur de modification");
             System.err.println(e);}
@@ -241,14 +268,14 @@ private void deplace (int i){
         try{
             model.setRowCount(0);
             {
-                rset = stmt.executeQuery("Select * From personne WHERE personneID = '"+txtrech.getText()+"'");
+                rset = stmt.executeQuery("Select * From inscription WHERE inscriptionID = '"+txtrech.getText()+"'");
             }while(rset.next()){
-                Object[] personne = {rset.getString(1),rset.getString(2),rset.getString(3),rset.getString(4)};
+                Object[] personne = {rset.getString(1),rset.getString(2),rset.getString(3)};
                 model.addRow(personne);
             }
 
             if (model.getRowCount()==0){
-                JOptionPane.showMessageDialog(null,"Il n'y a pas de personne correspondant a votre recherche");
+                JOptionPane.showMessageDialog(null,"Il n'y a pas d'inscription correspondant a votre recherche");
             }
 
         }catch(Exception e){JOptionPane.showMessageDialog(null,"erreur de recherche");}
@@ -256,8 +283,7 @@ private void deplace (int i){
 
     private void tableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tableMouseClicked
         try{
-            int i =table.getSelectedRow();
-            deplace(i);
+           
 
         } catch(Exception e){JOptionPane.showMessageDialog(null,"erreur avec le tableau");}
     }//GEN-LAST:event_tableMouseClicked
@@ -270,6 +296,64 @@ private void deplace (int i){
         }
     }//GEN-LAST:event_quitterActionPerformed
 
+    private void txtcActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtcActionPerformed
+      
+    }//GEN-LAST:event_txtcActionPerformed
+
+    private void txtcMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtcMouseClicked
+               // TODO add your handling code here:
+    }//GEN-LAST:event_txtcMouseClicked
+
+    private void txtcMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtcMouseEntered
+
+    }//GEN-LAST:event_txtcMouseEntered
+
+    private void txtpMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtpMouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtpMouseClicked
+
+    private void txtpMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtpMouseEntered
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtpMouseEntered
+
+    private void txtpActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtpActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtpActionPerformed
+     public void remplibox(){
+         String sql = "Select classeID, nom from classe";
+       try{
+           ResultSet Rs=stmt.executeQuery(sql);
+           while(Rs.next()){
+               String classeID = Rs.getString("classeID");
+               String nom = Rs.getString("nom");
+               txtc.addItem(classeID);
+               txtc.addItem(nom);
+           }
+           
+       }catch (SQLException e){
+           e.printStackTrace();
+       }
+            // TODO add your handling code here:
+     }
+     
+      public void remplibox1(){
+         String sql = "Select personneID,nom from personne";
+       try{
+           ResultSet Rs=stmt.executeQuery(sql);
+           while(Rs.next()){
+               String classeID = Rs.getString("personneID");
+               String nom = Rs.getString("nom");
+               txtp.addItem(classeID);
+               txtp.addItem(nom);
+               
+           }
+           
+       }catch (SQLException e){
+           e.printStackTrace();
+       }
+            // TODO add your handling code here:
+     }
+   
     /**
      * @param args the command line arguments
      */
@@ -287,23 +371,28 @@ private void deplace (int i){
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(Personne.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(inscription.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(Personne.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(inscription.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(Personne.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(inscription.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(Personne.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(inscription.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new Personne().setVisible(true);
+                new inscription().setVisible(true);
+                
             }
         });
     }
+    
+
+
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
@@ -313,16 +402,14 @@ private void deplace (int i){
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JButton quitter;
     private javax.swing.JTable table;
-    private javax.swing.JTextField txtid;
-    private javax.swing.JTextField txtnom;
-    private javax.swing.JTextField txtpr;
+    private javax.swing.JComboBox<String> txtc;
+    private javax.swing.JTextField txti;
+    private javax.swing.JComboBox<String> txtp;
     private javax.swing.JTextField txtrech;
-    private javax.swing.JComboBox<String> txttype;
     // End of variables declaration//GEN-END:variables
 }

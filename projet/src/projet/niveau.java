@@ -154,7 +154,7 @@ public class niveau extends javax.swing.JFrame {
                 {null, null}
             },
             new String [] {
-                "Title 1", "Title 2"
+                "niveauID", "nom"
             }
         ));
         jScrollPane1.setViewportView(table);
